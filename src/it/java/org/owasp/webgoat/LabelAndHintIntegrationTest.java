@@ -5,6 +5,8 @@ import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -14,6 +16,8 @@ import java.util.Properties;
 public class LabelAndHintIntegrationTest extends IntegrationTest {
 
     final static String ESCAPE_JSON_PATH_CHAR = "\'";
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(LabelAndHintIntegrationTest.class);
 
     @Test
     public void testSingleLabel() {
@@ -116,7 +120,7 @@ public class LabelAndHintIntegrationTest extends IntegrationTest {
             // load a properties file
             prop.load(input);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("Error loading properties file", e);
         }
         return prop;
     }

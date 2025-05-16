@@ -42,6 +42,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RestController
 @AssignmentHints(
@@ -53,6 +55,8 @@ import org.springframework.web.bind.annotation.RestController;
       "SqlStringInjectionHint-mitigation-10b-5"
     })
 public class SqlInjectionLesson10b extends AssignmentEndpoint {
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(SqlInjectionLesson10b.class);
 
   @PostMapping("/SqlInjectionMitigations/attack10b")
   @ResponseBody
@@ -127,7 +131,7 @@ public class SqlInjectionLesson10b extends AssignmentEndpoint {
     try {
       javaFileObject = new JavaObjectFromString("TestClass.java", javaFileContents.toString());
     } catch (Exception exception) {
-      exception.printStackTrace();
+      LOGGER.error("Error while creating JavaObjectFromString", exception);
     }
     return javaFileObject;
   }
